@@ -1,3 +1,6 @@
+import React from "react";
+import { render } from "react-dom";
+
 import App from "./App";
 
-console.log(App.bomdia("Ana"));
+render(App.bomdia("Ana"), document.getElementById("App"));
