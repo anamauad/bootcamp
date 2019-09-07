@@ -35,7 +35,7 @@ class PostList extends Component {
         },
         date: "04 Jun 2019",
         content:
-          "Fala galera, beleza?<br>Estou fazendo o Bootcamp GoStack da Rocketseat e está sendo muito massa! Alguém mais aí fazendo, comenta na publicação para trocarmos uma ideia.",
+          "Fala galera, beleza?\n\nEstou fazendo o Bootcamp GoStack da Rocketseat e está sendo muito massa! Alguém mais aí fazendo, comenta na publicação para trocarmos uma ideia.",
         comments: [
           {
             id: 1,
