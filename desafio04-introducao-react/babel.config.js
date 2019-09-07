@@ -4,5 +4,6 @@ module.exports = {
     "@babel/preset-env",
     // transforma func do react que o navegador nao entende
     "@babel/preset-react"
-  ]
+  ],
+  plugins: ["@babel/plugin-proposal-class-properties"]
 };

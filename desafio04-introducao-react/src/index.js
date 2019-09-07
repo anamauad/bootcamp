@@ -3,4 +3,4 @@ import { render } from "react-dom";
 
 import App from "./App";
 
-render(App.bomdia("Ana"), document.getElementById("App"));
+render(<App />, document.getElementById("app"));
