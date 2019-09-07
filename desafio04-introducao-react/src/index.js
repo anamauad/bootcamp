@@ -1,1 +1,3 @@
-console.log("oi");
+import App from "./App";
+
+console.log(App.bomdia("Ana"));
