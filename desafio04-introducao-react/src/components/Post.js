@@ -6,18 +6,16 @@ import Comment from "./Comment";
 function Post({ data }) {
   const { author, date, content, comments } = data;
   return (
-    <li class="post">
-      <div>
-        <div class="avatar">
-          <img src="{author.avatar}" alt="{author.avatar}" />
-        </div>
+    <li className="post">
+      <div className="title">
+        <img src={author.avatar} alt={author.name} />
         <div>
-          <div class="author">{author.name}</div>
-          <div class="date">{date}</div>
+          <div className="author">{author.name}</div>
+          <div className="date">{date}</div>
         </div>
       </div>
-      <p class="content">{content}</p>
-      <ul class="comments">
+      <p>{content}</p>
+      <ul className="comments">
         {comments.map(comment => (
           <Comment key={comment.id} data={comment} />
         ))}

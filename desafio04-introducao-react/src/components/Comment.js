@@ -4,14 +4,11 @@ import React, { Component } from "react";
 function Comment({ data }) {
   const { author, content } = data;
   return (
-    <li class="comment">
-      <div class="avatar">
-        <img src="{author.avatar}" alt="{author.avatar}" />
+    <li>
+      <img src={author.avatar} alt={author.name} />
+      <div className="message">
+        <strong>{author.name}</strong> {content}
       </div>
-      <p class="container">
-        <span class="author">{author.name}</span>
-        <span class="content">{content}</span>
-      </p>
     </li>
   );
 }
