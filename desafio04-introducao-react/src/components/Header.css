@@ -9,11 +9,16 @@ header#main-header {
   overflow: hidden;
 }
 
-header#main-header img {
+header#main-header .logo {
   padding-left: 20px;
 }
 header#main-header span {
   padding-right: 20px;
   font-weight: bold;
   font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+header#main-header span i {
+  margin-left: 8px;
 }

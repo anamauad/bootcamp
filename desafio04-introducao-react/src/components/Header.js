@@ -9,8 +9,10 @@ class Header extends Component {
   render() {
     return (
       <header id="main-header">
-        <img src={logo} alt="logo do facebook" />
-        <span>Meu perfil</span>
+        <img class="logo" src={logo} alt="logo do facebook" />
+        <span>
+          Meu perfil <i className="material-icons">account_circle</i>
+        </span>
       </header>
     );
   }

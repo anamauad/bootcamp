@@ -55,10 +55,15 @@
   padding: 20px 0;
 }
 
+#app .post .line {
+  width: 100%;
+  background: #eee;
+  height: 1px;
+}
+
 #app .post .comments {
   list-style-type: none;
   padding-top: 20px;
-  border-top: #eee solid 1px;
 }
 
 #app .post .comments li:not(:first-child) {

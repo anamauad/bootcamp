@@ -15,6 +15,7 @@ function Post({ data }) {
         </div>
       </div>
       <p>{content}</p>
+      <div className="line"></div>
       <ul className="comments">
         {comments.map(comment => (
           <Comment key={comment.id} data={comment} />
