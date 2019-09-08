@@ -1,0 +1,24 @@
+header#main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #4a90e2;
+  width: 100%;
+  height: 64px;
+  color: #fff;
+  overflow: hidden;
+}
+
+header#main-header .logo {
+  padding-left: 20px;
+}
+header#main-header span {
+  padding-right: 20px;
+  font-weight: bold;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+header#main-header span i {
+  margin-left: 8px;
+}

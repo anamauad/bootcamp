@@ -1,0 +1,84 @@
+.content {
+  padding: 0 40px;
+  margin: auto;
+}
+
+#app .postlist {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+}
+
+#app .post {
+  padding: 20px;
+
+  background: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.133916);
+  border-radius: 4px;
+  margin: 7px;
+}
+
+#app .post .title,
+#app .post .comments li {
+  display: flex;
+  flex-direction: row;
+}
+
+#app .post img {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+  font-size: 8px;
+}
+
+#app .post .title .author {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #4a4a4a;
+  padding-bottom: 3px;
+}
+
+#app .post .title .date {
+  font-size: 11px;
+  line-height: 13px;
+  color: #9a9a9a;
+}
+
+#app .post p {
+  font-size: 14px;
+  line-height: 22px;
+  color: #3e3e3e;
+  padding: 20px 0;
+}
+
+#app .post .line {
+  width: 100%;
+  background: #eee;
+  height: 1px;
+}
+
+#app .post .comments {
+  list-style-type: none;
+  padding-top: 20px;
+}
+
+#app .post .comments li:not(:first-child) {
+  margin-top: 10px;
+}
+
+#app .post .comments .message {
+  background: #eeeeee;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #3e3e3e;
+}
+
+#app .post .comments .message strong {
+  font-weight: bold;
+}
