@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import api from '../../services/api';
 
-import { Loading, Owner } from './styles';
+import { Loading, Owner, IssuesList } from './styles';
 import Container from '../../components/Container';
 
 export default class Repository extends Component {
@@ -61,20 +61,24 @@ export default class Repository extends Component {
           <h1>{repository.name}</h1>
           <p>{repository.description}</p>
         </Owner>
-      </Container>
-    );
 
-    /* return (
-      <>
-        <p>Open issues: {repository.open_issues}</p>
-        <ul>
+        <IssuesList>
           {issues.map(issue => (
-            <li key={issue.id}>
-              {issue.state}: {issue.number} - {issue.title}
+            <li key={String(issue.id)}>
+              <img src={issue.user.avatar_url} alt={issue.user.login} />
+              <div>
+                <strong>
+                  <a href={issue.html_url} target="blank">
+                    {issue.title}
+                  </a>
+                  {/* LABELS */}
+                </strong>
+                <p>{issue.user.login}</p>
+              </div>
             </li>
           ))}
-        </ul>
-      </>
-    ); */
+        </IssuesList>
+      </Container>
+    );
   }
 }
