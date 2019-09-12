@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import api from '../../services/api';
 
-// import { Container } from './styles';
+import { Loading, Owner } from './styles';
+import Container from '../../components/Container';
 
 export default class Repository extends Component {
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        repository: PropTypes.string,
+      }),
+    }).isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -39,10 +49,23 @@ export default class Repository extends Component {
 
   render() {
     const { loading, repository, issues } = this.state;
+
+    if (loading) {
+      return <Loading>Carregando</Loading>;
+    }
     return (
+      <Container>
+        <Owner>
+          <Link to="/">Voltar aos repositórios</Link>
+          <img src={repository.owner.avatar_url} alt={repository.owner.login} />
+          <h1>{repository.name}</h1>
+          <p>{repository.description}</p>
+        </Owner>
+      </Container>
+    );
+
+    /* return (
       <>
-        <h1>Repository: {repository.full_name}</h1>
-        <p>Owner: {repository.owner ? repository.owner.login : ''}</p>
         <p>Open issues: {repository.open_issues}</p>
         <ul>
           {issues.map(issue => (
@@ -52,6 +75,6 @@ export default class Repository extends Component {
           ))}
         </ul>
       </>
-    );
+    ); */
   }
 }

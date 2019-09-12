@@ -77,6 +77,7 @@ yarn add react-router-dom
 yarn add styled-components
 yarn add react-icons
 yarn add axios
+yarn add prop-types
 ```
 
 # Extensões instaladas
