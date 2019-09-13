@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import { FaChevronCircleLeft, FaChevronCircleRight } from 'react-icons/fa';
 import api from '../../services/api';
 
 import {
@@ -9,6 +11,8 @@ import {
   IssuesList,
   IssuesFilter,
   FilterButton,
+  PageNav,
+  SubmitButton,
 } from './styles';
 import Container from '../../components/Container';
 
@@ -43,7 +47,17 @@ export default class Repository extends Component {
     await this.loadIssues('all');
   };
 
-  async loadIssues(state) {
+  nextPage = async () => {
+    const { issuesState, page } = this.state;
+    await this.loadIssues(issuesState, page + 1);
+  };
+
+  previousPage = async () => {
+    const { issuesState, page } = this.state;
+    await this.loadIssues(issuesState, page - 1);
+  };
+
+  async loadIssues(state, page = 1) {
     this.setState({ loading: true });
     const { match } = this.props;
 
@@ -53,7 +67,8 @@ export default class Repository extends Component {
       api.get(`/repos/${repoName}/issues`, {
         params: {
           state,
-          per_page: 5,
+          per_page: 30,
+          page,
         },
       }),
     ]);
@@ -63,12 +78,13 @@ export default class Repository extends Component {
       repository: repository.data,
       issues: issues.data,
       issuesState: state,
+      page,
     });
     console.log(this.state);
   }
 
   render() {
-    const { loading, repository, issues, issuesState } = this.state;
+    const { loading, repository, issues, issuesState, page } = this.state;
 
     if (loading) {
       return <Loading>Carregando</Loading>;
@@ -120,6 +136,23 @@ export default class Repository extends Component {
             </li>
           ))}
         </IssuesList>
+        <PageNav>
+          <SubmitButton
+            onClick={this.previousPage}
+            title="Página anterior"
+            disabled={page < 2}
+          >
+            <FaChevronCircleLeft />
+          </SubmitButton>
+          <span>Página {page}</span>
+          <SubmitButton
+            onClick={this.nextPage}
+            title="Próxima página"
+            disabled={issues.length < 30}
+          >
+            <FaChevronCircleRight />
+          </SubmitButton>
+        </PageNav>
       </Container>
     );
   }

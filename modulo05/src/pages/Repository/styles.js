@@ -98,7 +98,7 @@ export const IssuesList = styled.ul`
   }
 `;
 
-export const IssuesFilter = styled.div`
+export const IssuesFilter = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -124,5 +124,36 @@ export const FilterButton = styled.button.attrs(props => ({
   &[disabled] {
     opacity: 1;
     cursor: not-allowed;
+  }
+`;
+
+export const PageNav = styled.ul`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0 0;
+
+  span {
+    font-size: 12px;
+    color: #999;
+  }
+`;
+export const SubmitButton = styled.button.attrs(props => ({
+  disabled: props.disabled,
+  title: props.title,
+}))`
+  background: #7159c1;
+  color: #fff;
+  border: 0;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 `;
