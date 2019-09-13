@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import api from '../../services/api';
 
-import { Loading, Owner, IssuesList } from './styles';
+import {
+  Loading,
+  Owner,
+  IssuesList,
+  IssuesFilter,
+  FilterButton,
+} from './styles';
 import Container from '../../components/Container';
 
 export default class Repository extends Component {
@@ -15,16 +21,30 @@ export default class Repository extends Component {
     }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      repository: {},
-      issues: [],
-      loading: true,
-    };
-  }
+  state = {
+    repository: {},
+    issues: [],
+    loading: true,
+  };
 
   async componentDidMount() {
+    await this.showOpenedIssues();
+  }
+
+  showOpenedIssues = async () => {
+    await this.loadIssues('open');
+  };
+
+  showClosedIssues = async () => {
+    await this.loadIssues('closed');
+  };
+
+  showAllIssues = async () => {
+    await this.loadIssues('all');
+  };
+
+  async loadIssues(state) {
+    this.setState({ loading: true });
     const { match } = this.props;
 
     const repoName = decodeURIComponent(match.params.repository);
@@ -32,7 +52,7 @@ export default class Repository extends Component {
       api.get(`/repos/${repoName}`),
       api.get(`/repos/${repoName}/issues`, {
         params: {
-          state: 'open',
+          state,
           per_page: 5,
         },
       }),
@@ -42,13 +62,13 @@ export default class Repository extends Component {
       loading: false,
       repository: repository.data,
       issues: issues.data,
+      issuesState: state,
     });
-
     console.log(this.state);
   }
 
   render() {
-    const { loading, repository, issues } = this.state;
+    const { loading, repository, issues, issuesState } = this.state;
 
     if (loading) {
       return <Loading>Carregando</Loading>;
@@ -63,6 +83,26 @@ export default class Repository extends Component {
         </Owner>
 
         <IssuesList>
+          <IssuesFilter>
+            <FilterButton
+              onClick={this.showOpenedIssues}
+              selected={issuesState === 'open'}
+            >
+              Em aberto
+            </FilterButton>
+            <FilterButton
+              onClick={this.showClosedIssues}
+              selected={issuesState === 'closed'}
+            >
+              Fechadas
+            </FilterButton>
+            <FilterButton
+              onClick={this.showAllIssues}
+              selected={issuesState === 'all'}
+            >
+              Todas
+            </FilterButton>
+          </IssuesFilter>
           {issues.map(issue => (
             <li key={String(issue.id)}>
               <img src={issue.user.avatar_url} alt={issue.user.login} />

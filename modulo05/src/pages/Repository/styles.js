@@ -40,7 +40,7 @@ export const Owner = styled.div`
 `;
 
 export const IssuesList = styled.ul`
-  padding-top: 30px;
+  padding-top: 0;
   margin-top: 30px;
   border-top: 1px solid #eee;
 
@@ -95,5 +95,34 @@ export const IssuesList = styled.ul`
       font-size: 12px;
       color: #999;
     }
+  }
+`;
+
+export const IssuesFilter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+`;
+
+export const FilterButton = styled.button.attrs(props => ({
+  disabled: props.selected,
+}))`
+  background: #7159c1;
+  color: #fff;
+  border: 0;
+  padding: 5px 15px;
+  border-radius: 4px;
+  margin: 0 5px;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &[disabled] {
+    opacity: 1;
+    cursor: not-allowed;
   }
 `;

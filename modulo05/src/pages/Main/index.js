@@ -36,12 +36,12 @@ class Main extends Component {
 
   handleOnChangeInput = e => {
     this.setState({ newRepo: e.target.value });
+    document.querySelector('input').classList.remove('error');
   };
 
   handleSubmit = async e => {
     e.preventDefault();
     this.setState({ loading: true });
-    document.querySelector('input').classList.remove('error');
 
     const { newRepo, repositories } = this.state;
 
