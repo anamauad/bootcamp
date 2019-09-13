@@ -46,6 +46,7 @@ class Main extends Component {
     const { newRepo, repositories } = this.state;
 
     try {
+      this.verifyDuplicate(newRepo);
       const response = await api.get(`/repos/${newRepo}`);
       const data = {
         name: response.data.full_name,
@@ -62,6 +63,15 @@ class Main extends Component {
       document.querySelector('input').classList.add('error');
     }
   };
+
+  verifyDuplicate(value) {
+    const repository = this.state.repositories.find(
+      item => item.name === value
+    );
+    if (repository) {
+      throw new Error('Repositório duplicado');
+    }
+  }
 
   render() {
     const { newRepo, loading, repositories } = this.state;
