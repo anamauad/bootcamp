@@ -36,6 +36,7 @@ class Main extends Component {
 
   handleOnChangeInput = e => {
     this.setState({ newRepo: e.target.value });
+    document.querySelector('input').classList.remove('error');
   };
 
   handleSubmit = async e => {
@@ -43,18 +44,34 @@ class Main extends Component {
     this.setState({ loading: true });
 
     const { newRepo, repositories } = this.state;
-    const response = await api.get(`/repos/${newRepo}`);
 
-    const data = {
-      name: response.data.full_name,
-    };
+    try {
+      this.verifyDuplicate(newRepo);
+      const response = await api.get(`/repos/${newRepo}`);
+      const data = {
+        name: response.data.full_name,
+      };
 
-    this.setState({
-      repositories: [...repositories, data],
-      newRepo: '',
-      loading: false,
-    });
+      this.setState({
+        repositories: [...repositories, data],
+        newRepo: '',
+        loading: false,
+      });
+    } catch (error) {
+      console.error(error);
+      this.setState({ loading: false });
+      document.querySelector('input').classList.add('error');
+    }
   };
+
+  verifyDuplicate(value) {
+    const repository = this.state.repositories.find(
+      item => item.name === value
+    );
+    if (repository) {
+      throw new Error('Repositório duplicado');
+    }
+  }
 
   render() {
     const { newRepo, loading, repositories } = this.state;

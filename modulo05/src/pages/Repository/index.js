@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import { FaChevronCircleLeft, FaChevronCircleRight } from 'react-icons/fa';
 import api from '../../services/api';
 
-import { Loading, Owner, IssuesList } from './styles';
+import {
+  Loading,
+  Owner,
+  IssuesList,
+  IssuesFilter,
+  FilterButton,
+  PageNav,
+  SubmitButton,
+} from './styles';
 import Container from '../../components/Container';
 
 export default class Repository extends Component {
@@ -15,16 +25,40 @@ export default class Repository extends Component {
     }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      repository: {},
-      issues: [],
-      loading: true,
-    };
-  }
+  state = {
+    repository: {},
+    issues: [],
+    loading: true,
+  };
 
   async componentDidMount() {
+    await this.showOpenedIssues();
+  }
+
+  showOpenedIssues = async () => {
+    await this.loadIssues('open');
+  };
+
+  showClosedIssues = async () => {
+    await this.loadIssues('closed');
+  };
+
+  showAllIssues = async () => {
+    await this.loadIssues('all');
+  };
+
+  nextPage = async () => {
+    const { issuesState, page } = this.state;
+    await this.loadIssues(issuesState, page + 1);
+  };
+
+  previousPage = async () => {
+    const { issuesState, page } = this.state;
+    await this.loadIssues(issuesState, page - 1);
+  };
+
+  async loadIssues(state, page = 1) {
+    this.setState({ loading: true });
     const { match } = this.props;
 
     const repoName = decodeURIComponent(match.params.repository);
@@ -32,8 +66,9 @@ export default class Repository extends Component {
       api.get(`/repos/${repoName}`),
       api.get(`/repos/${repoName}/issues`, {
         params: {
-          state: 'open',
-          per_page: 5,
+          state,
+          per_page: 30,
+          page,
         },
       }),
     ]);
@@ -42,13 +77,14 @@ export default class Repository extends Component {
       loading: false,
       repository: repository.data,
       issues: issues.data,
+      issuesState: state,
+      page,
     });
-
     console.log(this.state);
   }
 
   render() {
-    const { loading, repository, issues } = this.state;
+    const { loading, repository, issues, issuesState, page } = this.state;
 
     if (loading) {
       return <Loading>Carregando</Loading>;
@@ -63,6 +99,26 @@ export default class Repository extends Component {
         </Owner>
 
         <IssuesList>
+          <IssuesFilter>
+            <FilterButton
+              onClick={this.showOpenedIssues}
+              selected={issuesState === 'open'}
+            >
+              Em aberto
+            </FilterButton>
+            <FilterButton
+              onClick={this.showClosedIssues}
+              selected={issuesState === 'closed'}
+            >
+              Fechadas
+            </FilterButton>
+            <FilterButton
+              onClick={this.showAllIssues}
+              selected={issuesState === 'all'}
+            >
+              Todas
+            </FilterButton>
+          </IssuesFilter>
           {issues.map(issue => (
             <li key={String(issue.id)}>
               <img src={issue.user.avatar_url} alt={issue.user.login} />
@@ -80,6 +136,23 @@ export default class Repository extends Component {
             </li>
           ))}
         </IssuesList>
+        <PageNav>
+          <SubmitButton
+            onClick={this.previousPage}
+            title="Página anterior"
+            disabled={page < 2}
+          >
+            <FaChevronCircleLeft />
+          </SubmitButton>
+          <span>Página {page}</span>
+          <SubmitButton
+            onClick={this.nextPage}
+            title="Próxima página"
+            disabled={issues.length < 30}
+          >
+            <FaChevronCircleRight />
+          </SubmitButton>
+        </PageNav>
       </Container>
     );
   }
