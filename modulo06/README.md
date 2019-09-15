@@ -2,7 +2,7 @@
 
 - Projeto criado usando react native 6.0, para Android somente
 - Debug em celular Android conectado por USB
-- Antes de instalar o pacote eslint, foi removido o arquivo de configuração pré-existente
+- Adicionado eslint, prettier
 
 ## Windows e WSL
 
@@ -11,6 +11,8 @@ Como o WSL ainda não oferece suporte para ReactNative, foi necessário instalar
 É possível reabrir o projeto pelo VSCode sem conectar pelo WSL, desde que o projeto esteja em diretório visível pelo windows.
 
 ## Adicionando eslint
+
+Remover o arquivo de configuração pré-existente ```.eslintrc.js```
 
 ```bash
 yarn add eslint -D
@@ -42,4 +44,9 @@ npm install eslint-plugin-react-hooks@^1.7.0
 Como os pacotes foram instalados pelo npm, o arquivo ```package.lock``` deve ser removido e dever ser executado o comando
 ```
 yarn
+```
+
+## Adicionando prettier
+```
+yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D
 ```
