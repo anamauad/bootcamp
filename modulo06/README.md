@@ -4,6 +4,8 @@
 - Criação de projeto usando react native 6.0, para Android somente
 - Adicionar eslint, prettier
 - Reactotron para debug
+- Rotas de navegação
+- Barra de status
 
 ## Windows e WSL
 
@@ -152,6 +154,7 @@ adb reverse tcp:9090 tcp:9090
 ```
 
 ## Rotas
+Rotas de navegação entre páginas:
 ```bash
 yarn add react-navigation react-native-gesture-handler react-native-reanimated
 yarn add react-navigation-stack
