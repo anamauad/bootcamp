@@ -6,6 +6,7 @@
 - Reactotron para debug
 - Rotas de navegação
 - Barra de status
+- Styled components
 
 ## Windows e WSL
 
@@ -163,3 +164,16 @@ yarn add react-navigation-drawer
 ```
 
 Para Android, um passo adicional é necessário, vide https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html
+
+# Styled components
+Permite definir estilo em formato CSS para cada componente, ao contrário da definição de estilos no formato camelCase, além de CSS prover mais opções de definições (exemplo: padding).
+
+```bash
+yarn add styled-components
+```
+Snippet "styled-rn".
+
+Define o CSS para cada componente, com várias diferenças do uso para ReactJS:
+- não permite definir estilos aninhados, deve ser um para cada componente
+- não permite definir estilos globais
+
