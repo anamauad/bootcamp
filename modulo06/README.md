@@ -1,14 +1,94 @@
 # Primeiro projeto React Native
 
-- Projeto criado usando react native 6.0, para Android somente
-- Debug em celular Android conectado por USB
-- Adicionado eslint, prettier
+- Preparação de ambiente, para desenvolver conectando um celular Android por USB
+- Criação de projeto usando react native 6.0, para Android somente
+- Adicionar eslint, prettier
+- Reactotron para debug
 
 ## Windows e WSL
 
 Como o WSL ainda não oferece suporte para ReactNative, foi necessário instalar e rodar tudo pelo windows e não mais pelo WSL.
 
 É possível reabrir o projeto pelo VSCode sem conectar pelo WSL, desde que o projeto esteja em diretório visível pelo windows.
+
+## Preparação de ambiente
+
+- Instalar o chocolatey
+- Instalar o Android SDK command-line tools
+
+### Chocolatey e dependências
+
+Instalar abrindo o commmand prompt as administrator, e teste a instalação:
+```bash
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+choco
+```
+
+Instalar o python2:
+```bash
+choco install -y python2
+```
+
+Obs: outras dependências são node e jdk 8
+```bash
+choco install -y nodejs.install jdk8
+```
+
+Instalar a interface por linha de comando do react native, e teste a instalação:
+```bash
+yarn global add react-native-cli
+
+react-native -h
+```
+
+### Android SDK
+Realize o download das ferramentas de linha de comando em https://developer.android.com/studio/#downloads
+
+Crie uma pasta e descompacte os arquivos do SDK:
+ ```bash
+mkdir c:\android\sdk
+```
+
+Adicione a variável de usuário ```ANDROID_HOME``` com o caminho para esse diretório.
+
+Edite a variável de usuário ```PATH``` e inclua os caminhos ```%ANDROID_HOME%\platform-toos``` e ```%ANDROID_HOME%\tools```.
+
+Instalar abrindo o commmand prompt as administrator as outras ferramentas, a partir do subdiretório tools\bin, aceitando as licenças:
+```bash
+c:
+cd \android\sdk\tools\bin
+sdkmanager  "platform-tools" "platforms;android-28" "build-tools;28.0.3"
+```
+
+## Criação de projeto
+Criar projeto conforme descrito em https://github.com/react-native-community/cli
+```bash
+npx react-native init modulo06
+```
+
+Conectar o dispositivo e verificar se é reconhecido pelo sistema:
+```bash
+adb devices
+```
+
+Construir o app e instalar no dispositivo conectado (abre terminal com Metro Bundler, que não deve ser fechado). O Metro Bundler converte e empacota o código do app em um bundle. 
+```bash
+cd modulo06
+
+react-native run-android
+```
+
+Após esta primeira vez, não é preciso construir o app novamente. É possível somente rodar o Metro Bundler e conectar ao dispositivo:
+```bash
+react-native start
+```
+
+Para atualizar as dependências do app, é necessário atualizar totamente o app e iniciar o Metro Bundler com:
+```bash
+react-native start --reset-cache
+```
+
 
 ## Adicionando eslint
 
@@ -50,3 +130,24 @@ yarn
 ```
 yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D
 ```
+
+## Reactotron
+Para debugar:
+
+Instalar:
+ - Siga o item "Quick Start for React Native":
+https://github.com/infinitered/reactotron
+ - Na página de releases, realizar download e instalar a aplicação
+
+Adicionar ao projeto:
+```bash
+yarn add reactotron-react-native
+```
+
+Adicione o arquivo ```ReactotronConfig.js``` com a configuração conforme a documentação.
+
+Para garantir que o dispositivo android consiga conectar ao Reactotron, é necessário executar o seguinte para redirecionar as portas:
+```bash
+adb reverse tcp:9090 tcp:9090
+```
+

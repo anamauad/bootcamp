@@ -8,6 +8,8 @@ import {
   StatusBar,
 } from 'react-native';
 
+import './config/ReactotronConfig';
+
 import { Header, Colors } from 'react-native/Libraries/NewAppScreen';
 
 const styles = StyleSheet.create({
