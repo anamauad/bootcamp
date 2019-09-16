@@ -165,7 +165,7 @@ yarn add react-navigation-drawer
 
 Para Android, um passo adicional é necessário, vide https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html
 
-# Styled components
+## Styled components
 Permite definir estilo em formato CSS para cada componente, ao contrário da definição de estilos no formato camelCase, além de CSS prover mais opções de definições (exemplo: padding).
 
 ```bash
@@ -177,3 +177,19 @@ Define o CSS para cada componente, com várias diferenças do uso para ReactJS:
 - não permite definir estilos aninhados, deve ser um para cada componente
 - não permite definir estilos globais
 
+## Adicionando estilos à página principal
+Adicionando ícones em formato de vetor:
+```bash
+yarn add react-native-vector-icons
+
+react-native link react-native-vector-icons
+  info Linking "react-native-vector-icons" Android dependency
+  info Android module "react-native-vector-icons" has been successfully linked
+  info Linking assets to android project
+  success Assets have been successfully linked to your project
+```
+
+No arquivo /android/app/build.gradle, incluia a seguinte linha para que as fontes de ícones sejam copiadas em tempo de build:
+```groovy
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+```
