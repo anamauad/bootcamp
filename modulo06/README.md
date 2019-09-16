@@ -132,7 +132,7 @@ yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D
 ```
 
 ## Reactotron
-Para debugar:
+Para debugar sem ter que abrir um novo console e ficar acompanhando o console do browser.
 
 Instalar:
  - Siga o item "Quick Start for React Native":
@@ -151,3 +151,12 @@ Para garantir que o dispositivo android consiga conectar ao Reactotron, é neces
 adb reverse tcp:9090 tcp:9090
 ```
 
+## Rotas
+```bash
+yarn add react-navigation react-native-gesture-handler react-native-reanimated
+yarn add react-navigation-stack
+yarn add react-navigation-tabs
+yarn add react-navigation-drawer
+```
+
+Para Android, um passo adicional é necessário, vide https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html
