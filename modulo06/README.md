@@ -8,6 +8,7 @@
 - Barra de status
 - Styled components
 - Acessar API do Github
+- Indicativo "loading"
 
 ## Windows e WSL
 
