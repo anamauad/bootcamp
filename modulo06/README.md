@@ -9,6 +9,7 @@
 - Styled components
 - Acessar API do Github
 - Indicativo "loading"
+- Salvando a lista de usuários
 
 ## Windows e WSL
 
@@ -199,4 +200,9 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 Acesso a API:
 ```bash
 yarn add axios
+```
+
+## Salvando a lista de usuários
+```bash
+yarn add @react-native-community/async-storage
 ```
