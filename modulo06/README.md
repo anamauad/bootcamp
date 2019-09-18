@@ -7,6 +7,7 @@
 - Rotas de navegação
 - Barra de status
 - Styled components
+- Acessar API do Github
 
 ## Windows e WSL
 
@@ -192,4 +193,9 @@ react-native link react-native-vector-icons
 No arquivo /android/app/build.gradle, incluia a seguinte linha para que as fontes de ícones sejam copiadas em tempo de build:
 ```groovy
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+```
+## Acessando a API do Github
+Acesso a API:
+```bash
+yarn add axios
 ```
