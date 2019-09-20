@@ -206,3 +206,8 @@ yarn add axios
 ```bash
 yarn add @react-native-community/async-storage
 ```
+
+## Navegação
+```bash
+yarn add prop-types
+```
